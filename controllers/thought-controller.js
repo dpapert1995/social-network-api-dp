@@ -1,7 +1,7 @@
+// Requires models
 const { Thought, User } = require('../models');
-
 const thoughtController = {
-
+    // Get thoughts
     getThoughts(req, res) {
         Thought.find({})
             .then(thoughtData => res.json(thoughtData))
@@ -10,6 +10,7 @@ const thoughtController = {
                 res.status(400).json(err);
             });
     },
+    // Get thought by id
     getThoughtByID({ params }, res) {
         Thought.findOne({ _id: params.thoughtId })
             .then(thoughtData => res.json(thoughtData))
@@ -18,6 +19,7 @@ const thoughtController = {
                 res.status(400).json(err);
             });
     },
+    // Add thought
     addThought({ params, body }, res) {
         Thought.create(body)
             .then(({ _id }) => {
@@ -29,35 +31,38 @@ const thoughtController = {
             })
             .then(thoughtData => {
                 if (!thoughtData) {
-                    res.status(404).json({ message: 'Incorrect thought data!' });
+                    res.status(404).json({ message: 'Invalid thought data!' });
                     return;
                 }
                 res.json(dbPizzaData);
             })
             .catch(err => res.json(err));
     },
+    // Update thoughts
     updateThought({ params, body }, res) {
         Thought.findByIdAndUpdate({ _id: params.thoughtId }, body, { runValidators: true, new: true })
             .then(thoughtData => {
                 if (!thoughtData) {
-                    res.status(404).json({ message: 'No user found with this ID!' });
+                    res.status(404).json({ message: 'No user found with an id of ' + _id + '!' });
                     return;
                 }
                 res.json(dbPizzaData);
             })
             .catch(err => res.json(err));
     },
+    // Delete thoughts
     deleteThought({ params }, res) {
         Thought.findByIdAndDelete({ _id: params.thoughtId }, { runValidators: true, new: true })
             .then(thoughtData => {
                 if (!thoughtData) {
-                    res.status(404).json({ message: 'No user found with this ID!' });
+                    res.status(404).json({ message: 'No user found with an id of ' + _id + '!' });
                     return;
                 }
                 res.json(dbPizzaData);
             })
             .catch(err => res.json(err));
     },
+    // Add reactions
     addReaction({params, body}, res){
         Thought.findOneAndUpdate(
             {_id: params.thoughtId},
@@ -73,6 +78,7 @@ const thoughtController = {
         })
         .catch(err => res.json(err));
     },
+    // Delete reaction
     deleteReaction({params}, res){
         Thought.findOneAndUpdate(
             {_id: params.thoughtId},
@@ -89,6 +95,5 @@ const thoughtController = {
         .catch(err => res.json(err));
     }
 }
-
 
 module.exports = thoughtController;
