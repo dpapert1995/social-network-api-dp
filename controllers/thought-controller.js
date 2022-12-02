@@ -34,7 +34,7 @@ const thoughtController = {
                     res.status(404).json({ message: 'Invalid thought data!' });
                     return;
                 }
-                res.json(dbPizzaData);
+                res.json(thoughtData);
             })
             .catch(err => res.json(err));
     },
@@ -46,7 +46,7 @@ const thoughtController = {
                     res.status(404).json({ message: 'No user found with an id of ' + _id + '!' });
                     return;
                 }
-                res.json(dbPizzaData);
+                res.json(thoughtData);
             })
             .catch(err => res.json(err));
     },
@@ -58,7 +58,7 @@ const thoughtController = {
                     res.status(404).json({ message: 'No user found with an id of ' + _id + '!' });
                     return;
                 }
-                res.json(dbPizzaData);
+                res.json(thoughtData);
             })
             .catch(err => res.json(err));
     },
@@ -74,7 +74,7 @@ const thoughtController = {
                 res.status(404).json({ message: 'Incorrect reaction data!' });
                 return;
             }
-            res.json(dbPizzaData);
+            res.json(thoughtData);
         })
         .catch(err => res.json(err));
     },
@@ -90,7 +90,7 @@ const thoughtController = {
                 res.status(404).json({ message: 'Incorrect reaction data!' });
                 return;
             }
-            res.json(dbPizzaData);
+            res.json(thoughtData);
         })
         .catch(err => res.json(err));
     }
